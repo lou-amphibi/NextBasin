@@ -16,3 +16,4 @@ has access to all information about employees, managers and tasks assigned to th
 - Lombok
 - View - Thymeleaf, Bootstrap, JS
 - Test - JUnit, Mockito
+- Build project - Maven
