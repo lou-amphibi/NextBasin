@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="shortcut icon" th:href="@{~/images/favicon.ico}" type="image/x-icon">
+    <meta charset="UTF-8">
+    <title>Form for add task</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+    <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+
+</head>
+<body>
+    <h1 align="center"> <b> New task for <span th:text="${currEmployee.firstName}"/>
+        <span th:text="${currEmployee.lastName}" /> </b>
+    </h1>
+    <hr>
+
+
+    <div>
+        <div  style="margin-top: 35px; width: 685px"
+              class="mainbox col-md-5 col-md-offset-3 col-sm-6 col-sm-offset-2" th:align="center">
+
+            <div class="panel panel-primary" style="border-color: #012026">
+
+                <div class="panel-heading" style="background: #012026">
+                    <div class="panel-title" >Task Form</div>
+                </div>
+
+                <div style="padding-top: 30px" class="panel-body">
+
+                    <form th:action="@{/manager/showEmployeeTasks/saveTask}" th:object="${taskForm}" method="post" class="form-horizontal">
+                        <div>
+                            <input type="hidden" th:value="${currEmployee.id}" name="employeeId">
+                        </div>
+
+                        <!-- text -->
+                        <div style="margin-bottom: 25px" class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-hand-right"></i></span>
+                            <input type="text" th:field="*{text}" placeholder="Task(*)" class="form-control" />
+                        </div>
+
+                        <div th:if="${#fields.hasErrors('text')}"
+                             style="margin-bottom: 25px" class="text-danger">
+                            <span th:errors="*{text}" />
+                        </div>
+
+                        <!-- start time -->
+                        <div style="margin-bottom: 25px" class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i> Start Time(*)</span>
+                            <input type="datetime-local" th:field="*{startDateTime}" placeholder="Start Time(*)" class="form-control" />
+                        </div>
+
+                        <div th:if="${#fields.hasErrors('startDateTime')}"
+                             style="margin-bottom: 25px" class="text-danger">
+                            <span th:errors="*{startDateTime}" />
+                        </div>
+
+                        <!-- end date time -->
+                        <div style="margin-bottom: 25px" class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i> End Time(*) &nbsp</span>
+                            <input type="datetime-local" th:field="*{endDateTime}" placeholder="End Time(*)" class="form-control" />
+                        </div>
+
+                        <div th:if="${#fields.hasErrors('endDateTime')}"
+                             style="margin-bottom: 25px" class="text-danger">
+                            <span th:errors="*{endDateTime}" />
+                        </div>
+
+                        <!-- time errors -->
+                        <div th:if="${timeError!= null}" style="margin-bottom: 25px" class="text-danger">
+                            <span th:text="${timeError}" />
+                        </div>
+
+                        <div th:if="${taskSaveError!= null}" style="margin-bottom: 25px" class="text-danger">
+                            <span th:text="${taskSaveError}" />
+                        </div>
+
+                        <div style="margin-top: 10px" class="form-group" th:align="center">
+                            <div class="col-sm-6 controls">
+                                <button type="submit" class="btn btn-success">Add Task</button>
+                                <a th:href="@{/manager/showEmployeeTasks(employeeId=${currEmployee.id})}" class="btn btn-info">Back to Employee Task</a>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div id="footer" th:insert="~{service/footer.html :: footer}" />
+</body>
+</html>

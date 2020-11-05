@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <link rel="shortcut icon" th:href="@{~/images/favicon.ico}" type="image/x-icon">
+    <title>Login Page</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+
+    <style type="text/css">
+        #loginForm {
+            position:absolute;
+            width:200px;
+            height:150px;
+            left:50%;
+            top:50%;
+            margin-left:-100px;
+            margin-top:-150px;
+        }
+        .warning {
+            color:red
+        }
+    </style>
+</head>
+<body>
+
+<div th:if="${param.error}" class="warning" align="center">
+    <strong>Invalid username/password</strong>
+</div>
+
+<div align="center" id="loginForm">
+    <form th:action="@{/login}" method="post">
+        <div><label> <b>User Name :</b> <input type="text" name="username"/> </label></div>
+        <div><label> <b>Password :</b> <input type="password" name="password"/> </label></div>
+        <div><input type="submit" value="Sign In" class="btn btn-primary btn-sm btn-dark" /></div>
+        <br>
+        <a th:href="@{/forgotPassword}" style="color: #0A0880"><b>Forgot Password?</b></a> <br>
+        <a th:href="@{/}" style="color: #0A0880"><b>Main Page</b></a>
+    </form>
+</div>
+
+<div th:if="${SuccessfulRegistration != null}" align="center">
+    <p> <strong> <span th:text="${SuccessfulRegistration}" style="color: #247B08"/> </strong></p>
+</div>
+
+<div id="footer" th:insert="~{service/footer.html :: footer}" />
+</body>
+</html>

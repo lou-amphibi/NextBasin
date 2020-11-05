@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="shortcut icon" th:href="@{~/images/favicon.ico}" type="image/x-icon">
+    <meta charset="UTF-8">
+    <title>User Tasks</title>
+
+    <!-- Bootstrap CSS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+          crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+<div class="container">
+    <h1 align="center"><img th:src="@{/images/nbLogo.png}">Active Task<img th:src="@{/images/employeeLogo.png}"></h1>
+    <hr>
+    <p align="center">
+        <b>
+        Manager: <span th:text="${manager.firstName}"/> <span th:text="${manager.lastName}"/>
+        <br>
+        Email: <span th:text="${manager.getEmail()}"/>
+        </b>
+    </p>
+    <hr>
+    <div th:if="${taskList!=null and !taskList.isEmpty()}" align="center">
+        <table class="table table-bordered table-striped"> <!-- Bootstrap -->
+            <thead class="thead-dark">
+            <th>Task</th>
+            <th>Begin</th>
+            <th>End</th>
+            <th>Status</th>
+            </thead>
+
+            <tbody>
+            <tr th:each="tempTask : ${taskList}">
+                <td th:text="${tempTask.text}"/>
+                <td th:text="${#temporals.format(tempTask.startDateTime, 'dd-MM-yyyy HH:mm')}"/>
+
+                <td>
+                    <span th:text="${#temporals.format(tempTask.endDateTime, 'dd-MM-yyyy HH:mm')}" />
+                    <img th:align="right" th:if="${tempTask.endDateTime.isBefore(#temporals.createNow())}" th:src="@{/images/taskDanger.png}">
+                    <img th:align="right" th:if="${tempTask.endDateTime.isAfter(#temporals.createNow()) and #temporals.day(tempTask.endDateTime).equals(#temporals.day(#temporals.createNow()))}" th:src="@{/images/taskWarning.png}">
+                </td>
+
+                <td th:align="center">
+                        <a th:if="${tempTask.status}" th:href="@{/user-workspace/updateTaskStatus(taskId=${tempTask.id})}" class="btn btn-primary">
+                            Active
+                        </a>
+                        <a th:unless="${tempTask.status}" th:href="@{/user-workspace/updateTaskStatus(taskId=${tempTask.id})}" class="btn btn-success">
+                            Done
+                        </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${taskList==null or taskList.isEmpty()}" align="center">
+        <h3><b>No tasks available</b></h3>
+    </div>
+
+    <div th:align="center">
+        <a th:href="@{/user-workspace/allManagers}" class="btn btn-info"><b>Managers</b></a>
+        <a th:href="@{/profile}" class="btn btn-info"><b>My Profile</b></a>
+        <a th:href="@{/logout}" class="btn btn-dark"><b>Logout</b></a>
+    </div>
+</div>
+
+<div id="footer" th:insert="~{service/footer.html :: footer}" />
+
+</body>
+</html>

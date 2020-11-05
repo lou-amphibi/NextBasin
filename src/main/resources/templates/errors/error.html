@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="shortcut icon" th:href="@{~/images/favicon.ico}" type="image/x-icon">
+    <meta charset="UTF-8">
+    <title>Default Error Page</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+<br>
+
+<div style="margin-top: 120px">
+    <hr>
+    <h1 align="center" style="font-size: 80px"> <img th:src="@{/images/nbLogo.png}"> Go to the Next Basin!</h1>
+    <hr>
+</div>
+
+<br>
+<div id="footer" th:insert="~{service/footer.html :: footer}" />
+</body>
+</html>

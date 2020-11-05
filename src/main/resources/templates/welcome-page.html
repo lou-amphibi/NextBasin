@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="shortcut icon" th:href="@{~/images/favicon.ico}" type="image/x-icon">
+    <meta charset="UTF-8">
+    <title>Welcome to NextBasin!</title>
+
+    <!-- Bootstrap CSS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <style>
+        .warning {
+            color:red
+        }
+        .sucess {
+            color:#247B08
+        }
+    </style>
+
+</head>
+<body>
+<div style="padding: 75px;">
+    <div>
+        <h1 align="center"><img th:src="@{/images/nbLogo.png}">Welcome to the NextBasin!</h1>
+        <hr>
+        <p align="center" style="font-size: 20px">NextBasin is a task manager with a distributed role system.</p>
+        <p align="center" style="font-size: 20px">Complete or set and accept tasks, make your job easier!</p>
+        <p align="center" style="font-size: 20px">See you in the NextBasin.</p>
+        <hr>
+    </div>
+        <br><br>
+        <div align="center">
+            <a th:href="@{/registration}"
+               class="btn btn-primary btn-lg btn-dark">
+                Registration
+            </a>
+
+            <a th:href="@{/login}"
+               class="btn btn-primary btn-lg btn-dark">
+                Login
+            </a>
+        </div>
+    <br>
+    <div th:if="${param.logout}" class="warning" align="center">
+        <strong>You have been logged out</strong>
+    </div>
+
+    <div th:if="${param.passwordChange}" class="sucess" align="center">
+        <strong>Request to reset password received. Check your email for the reset link</strong>
+    </div>
+
+    <div th:if="${param.resetPasswordError}" class="warning" align="center">
+        <strong>The link is invalid or broken!</strong>
+    </div>
+
+    <div th:if="${param.passwordChangeConfirm}" class="sucess" align="center">
+        <strong>Password change was successful!</strong>
+    </div>
+
+</div>
+
+
+<div id="footer" th:insert="~{service/footer.html :: footer}" />
+</body>
+</html>

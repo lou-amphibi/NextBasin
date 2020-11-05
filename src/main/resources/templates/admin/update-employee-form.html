@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="shortcut icon" th:href="@{~/images/favicon.ico}" type="image/x-icon">
+    <meta charset="UTF-8">
+    <title>Update Employee</title>
+
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+    <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+
+</head>
+<body>
+
+<div>
+    <div  style="margin-top: 70px; width: 685px;"
+          class="mainbox col-md-5 col-md-offset-3 col-sm-6 col-sm-offset-2" th:align="center">
+
+        <div class="panel panel-primary" style="border-color: #012026">
+
+            <div class="panel-heading" style="background: #012026">
+                <div class="panel-title" >Update Employee</div>
+            </div>
+
+            <div style="padding-top: 30px" class="panel-body">
+
+                <form th:action="@{/admin/employees/saveEmployee}" th:object="${employeeForm}" method="post" class="form-horizontal">
+
+                    <div>
+                        <input type="hidden" th:value="${currEmployee.id}" name="employeeId">
+                    </div>
+
+                    <div>
+                        <input type="hidden" th:field="*{password}" name="password">
+                    </div>
+
+                    <div>
+                        <input type="hidden" th:field="*{passwordConfirm}" name="passwordConfirm">
+                    </div>
+
+                    <!-- username -->
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input type="text" th:field="*{username}" placeholder="username (*)" class="form-control" />
+                    </div>
+
+                    <div th:if="${#fields.hasErrors('username')}"
+                         style="margin-bottom: 25px" class="text-danger">
+                        <span th:errors="*{username}">Username is required</span>
+                    </div>
+
+                    <div th:if="${usernameOrEmailError != null}"
+                         style="margin-bottom: 25px" class="text-danger">
+                        <span th:text="${usernameOrEmailError}" />
+                    </div>
+
+                    <!-- first name -->
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
+                        <input type="text" th:field="*{firstName}" placeholder="First name(*)" class="form-control" />
+                    </div>
+
+                    <div th:if="${#fields.hasErrors('firstName')}"
+                         style="margin-bottom: 25px" class="text-danger">
+                        <span th:errors="*{firstName}">First name is required</span>
+                    </div>
+
+                    <!-- last name -->
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
+                        <input type="text" th:field="*{lastName}" placeholder="Last name(*)" class="form-control" />
+                    </div>
+
+                    <div th:if="${#fields.hasErrors('lastName')}"
+                         style="margin-bottom: 25px" class="text-danger">
+                        <span th:errors="*{lastName}">Last name is required</span>
+                    </div>
+
+                    <!-- email -->
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                        <input type="text" th:field="*{email}" placeholder="Email(*)" class="form-control" />
+                    </div>
+
+                    <div th:if="${#fields.hasErrors('email')}"
+                         style="margin-bottom: 25px" class="text-danger">
+                        <span th:errors="*{email}">Email is required</span>
+                    </div>
+
+                    <!-- manager list -->
+                    <div class="input-group" style="margin-bottom: 25px; width: 275px" >
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
+                        <select class="form-control" name="manager-droplist" id="md" th:field="*{managerId}">
+                            <option value="-1">Manager not selected</option>
+                            <option th:each="manager : ${managersList}"
+                                    th:value="${manager.id}">
+                                <span th:text="${manager.firstName}"/>
+                                <span th:text="${manager.lastName}"/>
+                            </option>
+                        </select>
+                    </div>
+
+                    <div style="margin-top: 10px" class="form-group" >
+                        <div class="col-sm-6 controls">
+                            <button type="submit" class="btn btn-success">Update</button>
+                            <a th:href="@{/admin/employees}" class="btn btn-info">Back to Employees List</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="footer" th:insert="~{service/footer.html :: footer}" />
+</body>
+</html>

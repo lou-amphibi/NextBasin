@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style type="text/css">
+        #footer {
+            position: fixed;
+            left: 0; bottom: 0;
+            padding: 10px;
+            background: midnightblue;
+            color: #fff;
+            width: 100%;
+        }
+     </style>
+</head>
+<body>
+    <div th:fragment="footer" id="footer">
+        &copy; lou-amphibi. <a href="https://github.com/lou-amphibi" style="color: #ffffff">GitHub</a>
+        <text style="float: right;">
+            <a th:href="@{/administration}" style="color: #ffffff" >Administration</a>
+        </text>
+    </div>
+</body>
+</html>

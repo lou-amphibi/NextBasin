@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <link rel="shortcut icon" th:href="@{~/images/favicon.ico}" type="image/x-icon">
+    <meta charset="UTF-8">
+    <title>Admin Panel</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+
+</head>
+<body>
+    <h1 align="center"><img th:src="@{/images/nbLogo.png}">Admin Panel<img th:src="@{/images/adminLogo.png}"></h1>
+    <hr>
+    <p align="center">
+        <b>
+            Administrator options:
+        </b>
+    </p>
+    <hr>
+    <div align="center" style="padding: 40px">
+        <a th:href="@{/admin/employees}" class="btn btn-lg btn-dark"><b>Employees</b></a>
+
+        <a th:href="@{/admin/managers}" class="btn btn-lg btn-dark"><b>Managers</b></a>
+
+        <a th:href="@{/admin/addNewManager}" class="btn btn-lg btn-primary"><b>Add new manager</b></a>
+
+        <a th:href="@{/profile}" class="btn btn-lg btn-info"><b>My Profile</b></a>
+
+        <a th:href="@{/logout}" class="btn btn-lg btn-info"><b>Logout</b></a>
+    </div>
+</body>
+<div id="footer" th:insert="~{service/footer.html :: footer}" />
+</html>

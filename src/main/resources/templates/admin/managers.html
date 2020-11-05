@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <link rel="shortcut icon" th:href="@{~/images/favicon.ico}" type="image/x-icon">
+    <meta charset="UTF-8">
+    <title>Manager List</title>
+
+    <!-- Bootstrap CSS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+<div class="container">
+    <h1 align="center"><img th:src="@{/images/nbLogo.png}">All Managers<img th:src="@{/images/adminLogo.png}"></h1>
+    <hr>
+
+    <div th:if="${managerList!=null and !managerList.isEmpty()}" align="center">
+        <table class="table table-bordered table-striped"> <!-- Bootstrap -->
+            <thead class="thead-dark">
+            <th>Id</th>
+            <th>Username</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Assigned Tasks</th>
+            <th>Employees</th>
+            <th>Action</th>
+            </thead>
+            <tbody>
+            <tr th:each="tempManager : ${managerList}">
+                <td th:text="${tempManager.id}"/>
+                <td th:text="${tempManager.username}"/>
+                <td th:text="${tempManager.firstName}"/>
+                <td th:text="${tempManager.lastName}"/>
+                <td th:text="${tempManager.email}"/>
+
+                <td th:align="center">
+                    <span th:text="${taskService.findCountOfManagerTask(tempManager.id)}"/>
+                </td>
+
+                <td th:align="center">
+                    <span th:text="${adminService.countAllByManagerId(tempManager.id)}" />
+                </td>
+
+                <td th:align="center" >
+                    <a  th:href="@{/admin/managers/updateManager(managerId=${tempManager.id})}"
+                        class="btn btn-warning btn-sm" >
+                        Update
+                    </a>
+
+                    <a  th:href="@{/admin/managers/deleteManager(managerId=${tempManager.id})}"
+                        class="btn btn-danger btn-sm" style="margin: 5px" onclick="if (!(confirm('Are you sure want to delete this manager?'))) return false">
+                        Delete&nbsp
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${managerList==null or managerList.isEmpty()}" align="center">
+        <h3><b>Registered managers not found</b></h3>
+    </div>
+
+    <div th:if="${SuccessfulRegistration != null}" align="center">
+        <p> <strong> <span th:text="${SuccessfulRegistration}" style="color: #247B08"/> </strong></p>
+    </div>
+
+    <div th:align="center">
+        <a th:href="@{/admin}" class="btn btn-info">Admin Page</a>
+    </div>
+</div>
+<div id="footer" th:insert="~{service/footer.html :: footer}" />
+</body>
+</html>

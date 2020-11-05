@@ -1,0 +1,23 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    background: mintcream;
+    margin-bottom: 60px;
+}
+#footer {
+    position:absolute;
+    left: 0; bottom: 0;
+    padding: 10px;
+    background: midnightblue;
+    color: #fff;
+    width: 100%;
+}
+table {
+    table-layout: fixed;
+    width:100%
+}
+td {
+    word-wrap:break-word;
+}
