@@ -28,7 +28,4 @@ public class MockFormFieldSetter {
         employee.setId(id);
         employee.setRoles(Collections.singleton(new Role(roleId, role)));
     }
-
-
-
 }
