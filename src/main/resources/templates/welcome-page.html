@@ -14,7 +14,7 @@
         .warning {
             color:red
         }
-        .sucess {
+        .success {
             color:#247B08
         }
     </style>
@@ -47,7 +47,7 @@
         <strong>You have been logged out</strong>
     </div>
 
-    <div th:if="${param.passwordChange}" class="sucess" align="center">
+    <div th:if="${param.passwordChange}" class="success" align="center">
         <strong>Request to reset password received. Check your email for the reset link</strong>
     </div>
 
@@ -55,7 +55,7 @@
         <strong>The link is invalid or broken!</strong>
     </div>
 
-    <div th:if="${param.passwordChangeConfirm}" class="sucess" align="center">
+    <div th:if="${param.passwordChangeConfirm}" class="success" align="center">
         <strong>Password change was successful!</strong>
     </div>
 
